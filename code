@@ -1,0 +1,35 @@
+85. Maximal Rectangle
+STATEMENT:-Given a rows x cols binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+Example 1:
+Input: matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+Output: 6
+Explanation: The maximal rectangle is shown in the above picture.
+code:-
+def function(h):
+            s=[]
+            m1=0
+            i=0
+            while i<len(h):
+                if not s or h[i]>=h[s[-1]]:
+                    s.append(i)
+                    i=i+1
+                else:
+                    t=s.pop()
+                    a=h[t]*((i-s[-1]-1)if s else i)
+                    m1=max(m1,a)
+            while s:
+                t=s.pop()
+                a=(h[t]*((i-s[-1]-1)if s else i))
+                m1=max(m1,a)
+            return m1
+l = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+l1=[0]*len(l[0])
+m=0
+for i in range(len(l)):
+     for j in range(len(l[0])):
+          if l[i][j]=="1":
+               l1[j]+=1
+          else:
+               l1[j]=0
+    m=max(m,function(l1))
+print(m)
